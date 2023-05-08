@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Head from 'next/head';
-import Layout from '../../promoter-blacklist/components/layout'
+import Layout from '../components/layout'
 import { useRef, useState } from 'react'
 
 
@@ -10,22 +10,30 @@ export default function AddPromoter() {
 
     const [formInput, setFormInput] = useState({
         first:"",
-        last:""
+        last:"",
+        company:"",
+        email:"",
+        phone:"",
+        country:"",
+        description:""
     })
-
-    const [form, setForm] = useState({})
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        setForm(formInput)
-        console.log(form)
+        setFormInput({
+            first: e.target.first.value,
+            last: e.target.last.value,
+            company: e.target.company.value,
+            email: e.target.email.value,
+            phone: e.target.phone.value, 
+            country: e.target.country.value,
+            description: e.target.description.value
+        })
+        console.log(formInput)
     }
 
-    const handleChangeFirst = (e) => {
-        setFormInput({first:e.target.value})
-    }
-    const handleChangeLast = (e) => {
-        setFormInput({last:e.target.value})
+    const handleChange = (e) => {
+        console.log("something changed")
     }
 
 
@@ -36,10 +44,10 @@ export default function AddPromoter() {
     </Head>
     <h1>Add a promoter</h1>
     <div className='form-containter'>
-        <form className='form-flow' onSubmit={handleSubmit}>
+        <form className='form-flow' onChange={handleChange} onSubmit={handleSubmit}>
             <ul>
-                <li><label htmlFor="firstName" >First name: </label><input name='first' onChange={handleChangeFirst} type="text" /></li>
-                <li><label htmlFor="last-name">Last name: </label><input name='last' onChange={handleChangeLast} type="text" /></li>
+                <li><label htmlFor="firstName" >First name: </label><input name='first' type="text" /></li>
+                <li><label htmlFor="last-name">Last name: </label><input name='last'  type="text" /></li>
                 <li><label htmlFor="company-name">Company: </label><input name='company' type="text" /></li>
                 <li><label htmlFor="email">Email: </label><input name='email' type="email" /></li>
                 <li><label htmlFor="phone-number">Ph number: </label><input name='phone' type="number" /></li>
@@ -50,8 +58,13 @@ export default function AddPromoter() {
 
         </form>
         <div>   
-            first={formInput.first}
-            Last={formInput.last}
+            {formInput.first}
+            {formInput.last}
+            {formInput.company}
+            {formInput.email}
+            {formInput.phone}
+            {formInput.country}
+            {formInput.description}
         </div>
     </div>
     <p>
