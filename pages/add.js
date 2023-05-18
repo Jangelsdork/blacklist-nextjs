@@ -18,9 +18,31 @@ export default function AddPromoter() {
         description:""
     })
 
-    const handleSubmit = (e) => {
+    const postPromoters = async (promoterData) => {
+        console.log(promoterData)
+        try {
+            const res = await fetch("/api/promoter/post",
+            {
+                method: "POST",
+                mode: "cors",
+                body: JSON.stringify(promoterData),
+                headers: {
+                    "Content-Type": "application/json",
+                  },
+            })
+            const data = await res.json()
+            console.log(data)
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
+
+    const handleSubmit = async (e) => {
+        // keep this 
         e.preventDefault()
-        setFormInput({
+
+        const data = {
             first: e.target.first.value,
             last: e.target.last.value,
             company: e.target.company.value,
@@ -28,8 +50,10 @@ export default function AddPromoter() {
             phone: e.target.phone.value, 
             country: e.target.country.value,
             description: e.target.description.value
-        })
-        console.log(formInput)
+        }
+        console.log(data)
+        setFormInput(data)
+        await postPromoters(data)
     }
 
     const handleChange = (e) => {
