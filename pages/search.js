@@ -1,31 +1,43 @@
 import Link from "next/link";
+import { useState } from "react";
 
 export default function Search() {
+
+const [allPromoters, setAllPromoters] = useState()
+  
   const getPromoters = async () => {
     console.log();
     try {
       const res = await fetch("/api/promoter/get");
       const data = await res.json();
       console.log(data);
-      return data;
+      setAllPromoters(data)
     } catch (error) {
       console.log(error);
     }
   };
 
-  function isData() {
-    return <div>LOADED!</div>;
+
+
+  function IsData() {
+    const eachPromoter = allPromoters.response.map((line) => 
+      <li key={line.id}>
+        <Link href={`/promoter_data/${line.id}`}>{line.first} {line.last}</Link>
+        </li>
+    )
+    return eachPromoter
   }
 
-  function isNoData() {
+  function IsNoData() {
     return <div>Still Loading</div>;
   }
 
-  function displayData(data) {
-    if (true) {
-      return <div>LOADED</div>;
+  function DisplayData() {
+    console.log(allPromoters)
+    if (allPromoters) {
+      return <IsData />
     }
-    return <isNoData />;
+    return <IsNoData />;
   }
 
   const handleClick = async (e) => {
@@ -38,9 +50,10 @@ export default function Search() {
       <h2>
         <Link href="/">Back to home</Link>
         <button onClick={handleClick}>query database</button>
-        <displayData />
-        <div>{displayData}</div>
       </h2>
+      <div className="resultsContainer">
+      <DisplayData />
+      </div>
     </>
   );
 }

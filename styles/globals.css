@@ -4,7 +4,7 @@
 html,
 body {
   padding: 0;
-  margin: 0;
+  margin: 40px;
   font-family: 'Open Sans', sans-serif;
   line-height: 1.6;
   font-size: 18px;
@@ -95,4 +95,8 @@ button {
      between the labels and their text fields */
   margin-left: 50px;
   text-align: right;
+}
+
+.resultsContainer {
+
 }
