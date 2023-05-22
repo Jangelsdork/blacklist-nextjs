@@ -6,11 +6,10 @@ export default function Search() {
 const [allPromoters, setAllPromoters] = useState()
   
   const getPromoters = async () => {
-    console.log();
     try {
       const res = await fetch("/api/promoter/get");
       const data = await res.json();
-      console.log(data);
+      console.log(res);
       setAllPromoters(data)
     } catch (error) {
       console.log(error);
@@ -22,7 +21,7 @@ const [allPromoters, setAllPromoters] = useState()
   function IsData() {
     const eachPromoter = allPromoters.response.map((line) => 
       <li key={line.id}>
-        <Link href={`/promoter_data/${line.id}`}>{line.first} {line.last}</Link>
+        <Link href={`/promoter/${line.id}`}>{line.first} {line.last}</Link>
         </li>
     )
     return eachPromoter
