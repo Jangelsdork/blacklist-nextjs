@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Search() {
 
@@ -39,16 +39,18 @@ const [allPromoters, setAllPromoters] = useState()
     return <IsNoData />;
   }
 
-  const handleClick = async (e) => {
-    await getPromoters();
-  };
+  useEffect(() => {
+    if (!allPromoters) {
+      getPromoters();
+    }
+  });
 
   return (
     <>
       <h1>Look up a promoter</h1>
       <h2>
         <Link href="/">Back to home</Link>
-        <button onClick={handleClick}>query database</button>
+        {/* <button onClick={handleClick}>query database</button> */}
       </h2>
       <div className="resultsContainer">
       <DisplayData />
