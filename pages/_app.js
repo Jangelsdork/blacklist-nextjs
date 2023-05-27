@@ -1,5 +1,5 @@
 
-import { ClerkProvider, SignedIn, SignedOut, clerkClient } from '@clerk/nextjs';
+import { ClerkProvider, SignedIn, SignedOut } from '@clerk/nextjs';
 import '../styles/globals.css';
 import { SignIn, UserButton } from '@clerk/clerk-react';
 

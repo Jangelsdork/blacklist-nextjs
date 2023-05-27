@@ -32,7 +32,7 @@ export default function NewSearch() {
 
   // displays if data hasn't been returned
   function IsNoData() {
-    return <div>...</div>
+    return <div></div>
   }
 
   // Component that displays different content depending if database has loaded or not.
@@ -64,8 +64,9 @@ export default function NewSearch() {
 
 return (
     <>
+        <div>You can search for previous entries by name, email, country, or company.</div>
         <form class="searchBar" onSubmit={handleSubmit} >
-         <input type="text" placeholder="Search by name, email, country, or company..." name="search" />
+         <input type="text" placeholder="Search..." name="search" />
             <button type="submit" value="Search Database">SEARCH</button>
         </form>
 
