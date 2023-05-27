@@ -8,6 +8,10 @@ export default function AddPromoter() {
 
     const inputRef = useRef(null)
 
+    // only used to render message that everything has been submitted 
+    const [submitSuccess, setSubmitSuccess] = useState()
+
+    // the form data is saved in state here, which is then passed to the api call method (via handle submit) 
     const [formInput, setFormInput] = useState({
         first:"",
         last:"",
@@ -19,7 +23,6 @@ export default function AddPromoter() {
     })
 
     const postPromoters = async (promoterData) => {
-        console.log(promoterData)
         try {
             const res = await fetch("/api/promoter/post",
             {
@@ -30,8 +33,13 @@ export default function AddPromoter() {
                     "Content-Type": "application/json",
                   },
             })
-            const data = await res.json()
-            console.log(data)
+            
+            const data = await res.json();
+
+            // after successful response, sets state so "success" message renders for the user, and resets the form 
+            if(data.response === "success"){
+                setSubmitSuccess(true)
+            }
         } catch (error) {
             console.log(error)
         }
@@ -39,7 +47,7 @@ export default function AddPromoter() {
     }
 
     const handleSubmit = async (e) => {
-        // keep this 
+        // keep this - stops page from refreshing when submit button is clicked 
         e.preventDefault()
 
         const data = {
@@ -54,12 +62,15 @@ export default function AddPromoter() {
         console.log(data)
         setFormInput(data)
         await postPromoters(data)
+        e.target.reset()
     }
-
-    const handleChange = (e) => {
-        console.log("something changed")
+    //renders 
+    function UploadSuccessful(){
+        console.log(submitSuccess)
+        if(submitSuccess === true){
+            return <div>Thanks, your submission has been added to the database.</div>
+        }
     }
-
 
     return (
     <Layout>
@@ -68,7 +79,7 @@ export default function AddPromoter() {
     </Head>
     <h1>Add a promoter</h1>
     <div className='form-containter'>
-        <form className='form-flow' onChange={handleChange} onSubmit={handleSubmit}>
+        <form className='form-flow' onSubmit={handleSubmit}>
             <ul>
                 <li><label htmlFor="firstName" >First name: </label><input name='first' type="text" /></li>
                 <li><label htmlFor="last-name">Last name: </label><input name='last'  type="text" /></li>
@@ -82,18 +93,13 @@ export default function AddPromoter() {
 
         </form>
         <div>   
-            {formInput.first}
-            {formInput.last}
-            {formInput.company}
-            {formInput.email}
-            {formInput.phone}
-            {formInput.country}
-            {formInput.description}
         </div>
+        <UploadSuccessful />
     </div>
     <p>
         <Link href="/">Back to home</Link>
     </p>
+    
 
     </Layout>
     )

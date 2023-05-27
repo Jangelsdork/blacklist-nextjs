@@ -14,7 +14,6 @@ export default async function handler(req, res) {
     or country like '%${search}%'
     or company like '%${search}%'
     `);
-  console.log(search)
     
   const response = results;
 

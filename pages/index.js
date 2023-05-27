@@ -1,8 +1,11 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import Link from "next/link";
+import { ClerkProvider, useUser, SignIn, SignedOut } from '@clerk/nextjs'
+
 
 export default function Home() {
+
   return (
     <div className={styles.container}>
       <Head>
@@ -21,7 +24,7 @@ export default function Home() {
             <p>Add a new promoter or incident into the database</p>
           </Link>
 
-          <Link href="/search" className={styles.card}>
+          <Link href="/newSearch" className={styles.card}>
             <h3>Search &rarr;</h3>
             <p>Search for an existing entry in the database</p>
           </Link>
