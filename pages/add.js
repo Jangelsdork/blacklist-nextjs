@@ -1,3 +1,4 @@
+//just adding this comment so I can redeploy on vercel
 import Link from 'next/link';
 import Head from 'next/head';
 import Layout from '../components/layout'
