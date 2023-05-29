@@ -1,8 +1,12 @@
+import { currentUser, useAuth } from "@clerk/nextjs";
 import Link from "next/link";
 import { useState } from "react";
 
 export default function NewSearch() {
   const [searchResults, setSearchResults] = useState();
+  const [currentUser,setCurrentUser] = useState(); 
+  const { userId } = useAuth()
+
  
   let search = ""
 
@@ -11,20 +15,28 @@ export default function NewSearch() {
       const res = await fetch("/api/promoter/search/" + search);
       console.log(res)
       const data = await res.json();
-      console.log(data);
       setSearchResults(data);
     } catch (error) {
       console.log(error);
     }
   };
 
+  //component that will load if current user = user that submitted the incident
+  function RenderEdit(){
+    if(currentUser && (currentUser === userId)){
+      return <div>Edit User</div>
+    }
+
+            }
+  
+
   //takes the data returned from the database, creates a jsx line containing the first and the last name, with a hyperlink to the promoter page
   function IsData() {
     const eachPromoter = searchResults.response.rows.map((line) => (
       <li key={line.id}>
         <Link href={`/promoter/${line.id}`}>
-          {line.first} {line.last}
-        </Link>
+          {line.first} {line.last}{setCurrentUser(line.user)}
+        </Link><RenderEdit />
       </li>
     ));
     return eachPromoter;

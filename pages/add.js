@@ -15,7 +15,6 @@ export default function AddPromoter() {
 
     //gets clerk auth user id 
     const { userId } = useAuth()
-    console.log(userId)
 
     // only used to render message that everything has been submitted 
     const [submitSuccess, setSubmitSuccess] = useState()
