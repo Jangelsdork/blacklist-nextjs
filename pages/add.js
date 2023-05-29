@@ -109,10 +109,8 @@ export default function AddPromoter() {
         <UploadSuccessful />
     </div>
     <p>
-        <Link href="/">Back to home</Link>
     </p>
     
-
     </Layout>
     )
   }

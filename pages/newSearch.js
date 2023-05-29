@@ -1,6 +1,7 @@
 import { currentUser, useAuth } from "@clerk/nextjs";
 import Link from "next/link";
 import { useState } from "react";
+import Layout from "../components/layout";
 
 export default function NewSearch() {
   const [searchResults, setSearchResults] = useState();
@@ -24,7 +25,7 @@ export default function NewSearch() {
   //component that will load if current user = user that submitted the incident
   function RenderEdit(){
     if(currentUser && (currentUser === userId)){
-      return <div>Edit User</div>
+      return <div>Edit entry</div>
     }
 
             }
@@ -49,7 +50,6 @@ export default function NewSearch() {
 
   // Component that displays different content depending if database has loaded or not.
   function DisplayData() {
-    console.log(searchResults);
     if (searchResults) {
       return <IsData />
     }
@@ -58,33 +58,24 @@ export default function NewSearch() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-
     const searchQuery = e.target.search.value
-    console.log(searchQuery)
     search = searchQuery
     searchPromoters()
     return search
     
   }
 
-  
-//   useEffect(() => {
-//     if (!allPromoters) {
-//       getPromoters();
-//     }
-//   });
 
 return (
-    <>
-        <div>You can search for previous entries by name, email, country, or company.</div>
+    <Layout>
+        <h4>You can search for previous entries by name, email, country, or company. You can edit, delete, or update your previous entries.</h4>
         <form class="searchBar" onSubmit={handleSubmit} >
          <input type="text" placeholder="Search..." name="search" />
             <button type="submit" value="Search Database">SEARCH</button>
         </form>
 
         <DisplayData /> 
-        <Link href="/">Back to home</Link>
-    </>
+    </Layout>
 )
 
 }

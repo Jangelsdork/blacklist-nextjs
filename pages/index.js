@@ -9,13 +9,13 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Promoter Blacklist</title>
+        <title>EBAIRR</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main>
         <h1 className={styles.title}>
-          Promoter blacklist
+        European Booking Agencies Incident Report Register
         </h1>
 
         <div className={styles.grid}>
