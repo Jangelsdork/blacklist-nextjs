@@ -3,11 +3,19 @@ import Link from 'next/link';
 import Head from 'next/head';
 import Layout from '../components/layout'
 import { useRef, useState } from 'react'
+import { useAuth } from '@clerk/nextjs';
+import moment from 'moment';
+
+
 
 
 export default function AddPromoter() {
 
     const inputRef = useRef(null)
+
+    //gets clerk auth user id 
+    const { userId } = useAuth()
+    console.log(userId)
 
     // only used to render message that everything has been submitted 
     const [submitSuccess, setSubmitSuccess] = useState()
@@ -20,7 +28,9 @@ export default function AddPromoter() {
         email:"",
         phone:"",
         country:"",
-        description:""
+        description:"",
+        user:"",
+        submissionDate:""
     })
 
     const postPromoters = async (promoterData) => {
@@ -50,6 +60,7 @@ export default function AddPromoter() {
     const handleSubmit = async (e) => {
         // keep this - stops page from refreshing when submit button is clicked 
         e.preventDefault()
+        const currentTime = moment().format('MMMM Do YYYY, h:mm:ss a')
 
         const data = {
             first: e.target.first.value,
@@ -58,7 +69,9 @@ export default function AddPromoter() {
             email: e.target.email.value,
             phone: e.target.phone.value, 
             country: e.target.country.value,
-            description: e.target.description.value
+            description: e.target.description.value,
+            user: userId, 
+            submissionDate: currentTime
         }
         console.log(data)
         setFormInput(data)
@@ -67,7 +80,6 @@ export default function AddPromoter() {
     }
     //renders 
     function UploadSuccessful(){
-        console.log(submitSuccess)
         if(submitSuccess === true){
             return <div>Thanks, your submission has been added to the database.</div>
         }

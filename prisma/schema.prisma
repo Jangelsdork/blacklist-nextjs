@@ -19,4 +19,7 @@ model Promoter {
   phone String
   country String
   description String
+  user String @default("user_2QNN74OnVmabb07dho0hOE4NUVE")
+  submissionDate String @default("May 29th 2023, 2:54:33 pm")
+
 }
