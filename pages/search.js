@@ -48,7 +48,8 @@ export default function Search() {
     <>
       <h1>Look up a promoter</h1>
       <h2>
-        <Link href="/">Back to home</Link>
+        <Link href="/searchnew">Back to search</Link>
+        <Link href="/">Back home</Link>
         {/* <button onClick={handleClick}>query database</button> */}
       </h2>
       <div className="resultsContainer">
