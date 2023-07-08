@@ -208,3 +208,19 @@ input:checked + .slider:before {
   flex-direction: row;
   align-items: center;
 }
+
+
+.results-container {
+  font-size: larger;
+  display: flex;
+  margin: 80px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-tools {
+  font-size: large;
+  display: flex;
+  margin: 10px;
+  gap: 30px;
+}

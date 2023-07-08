@@ -32,9 +32,7 @@ return(
         rows="10"
       ></textarea>
     </li>
-    <li>
-      <button>Link individual to a company</button>
-    </li>
+
     <li>
       <input className="button" type="submit" value="Send Request" />
     </li>
