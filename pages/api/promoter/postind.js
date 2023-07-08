@@ -9,7 +9,7 @@ export default async function handler(req, res) {
  const conn = getConnection()
 
 const results = await conn.execute(
-  "Insert into Promoter (first, last, company, email, phone, country, description, user, submissionDate) VALUES (:first, :last, :company, :email, :phone, :country, :description, :user, :submissionDate)", req.body
+  "Insert into Promoter (first, last, email, phone, country, description, user, submissionDate) VALUES (:first, :last, :email, :phone, :country, :description, :user, :submissionDate)", req.body
 );
 
 //  const response = results.rows

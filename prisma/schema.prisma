@@ -8,18 +8,43 @@ generator client {
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
+  relationMode      = "prisma"
 }
 
 model Promoter {
-  id          Int           @id @default(autoincrement())
-  first String
-  last String
-  company String
-  email String
-  phone String
-  country String
-  description String
-  user String @default("user_2QNN74OnVmabb07dho0hOE4NUVE")
+  id             Int    @id @default(autoincrement())
+  first          String
+  last           String
+  email          String
+  phone          String
+  country        String
+  description    String
+  user           String @default("user_2QNN74OnVmabb07dho0hOE4NUVE")
   submissionDate String @default("May 29th 2023, 2:54:33 pm")
 
+  PromoterCompany PromoterCompany[]
+}
+
+model Company {
+  id                 Int    @id @default(autoincrement())
+  company_name       String
+  company_email      String
+  company_street     String
+  company_street_num String
+  company_postcode   String
+  company_city       String
+  company_state      String
+  company_country    String
+
+  PromoterCompany PromoterCompany[]
+}
+
+model PromoterCompany {
+  id         Int      @id @default(autoincrement())
+  promoter   Promoter @relation(fields: [promoterId], references: [id])
+  promoterId Int
+  company    Company  @relation(fields: [companyId], references: [id])
+  companyId  Int
+  @@index([promoterId])
+  @@index([companyId])
 }

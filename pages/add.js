@@ -5,7 +5,8 @@ import Layout from '../components/layout'
 import { useRef, useState } from 'react'
 import { useAuth } from '@clerk/nextjs';
 import moment from 'moment';
-
+import FormInd from '../components/Formind';
+import FormOrg from '../components/formorg';
 
 
 
@@ -19,7 +20,7 @@ export default function AddPromoter() {
     // only used to render message that everything has been submitted 
     const [submitSuccess, setSubmitSuccess] = useState()
 
-    // the form data is saved in state here, which is then passed to the api call method (via handle submit) 
+    // the individual form data is saved in state here, which is then passed to the api call method (via handle submit) 
     const [formInput, setFormInput] = useState({
         first:"",
         last:"",
@@ -31,10 +32,25 @@ export default function AddPromoter() {
         user:"",
         submissionDate:""
     })
+   
+    // the Organisation form data is saved in state here, which is then passed to the api call method (via handle submit) 
+    const [orgFormInput, setOrgFormInput] = useState({
+        company_name:"",
+        company_email:"",
+        company_street:"",
+        company_street_num:"",
+        company_postcode:"",
+        company_city:"",
+        company_state:"",
+        company_country:"", 
+    })
 
+    const [formType, setFormType] = useState(false)
+
+    //api post call for "individuals" form 
     const postPromoters = async (promoterData) => {
         try {
-            const res = await fetch("/api/promoter/post",
+            const res = await fetch("/api/promoter/postind",
             {
                 method: "POST",
                 mode: "cors",
@@ -55,7 +71,32 @@ export default function AddPromoter() {
         }
 
     }
+    //api post call for "organisation" form 
+    const postOrg = async (orgData) => {
+        try {
+            const res = await fetch("/api/promoter/postorg",
+            {
+                method: "POST",
+                mode: "cors",
+                body: JSON.stringify(orgData),
+                headers: {
+                    "Content-Type": "application/json",
+                  },
+            })
+            
+            const data = await res.json();
 
+            // after successful response, sets state so "success" message renders for the user, and resets the form 
+            if(data.response === "success"){
+                setSubmitSuccess(true)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
+
+    //submission handler for individual form entry 
     const handleSubmit = async (e) => {
         // keep this - stops page from refreshing when submit button is clicked 
         e.preventDefault()
@@ -64,7 +105,6 @@ export default function AddPromoter() {
         const data = {
             first: e.target.first.value,
             last: e.target.last.value,
-            company: e.target.company.value,
             email: e.target.email.value,
             phone: e.target.phone.value, 
             country: e.target.country.value,
@@ -77,7 +117,45 @@ export default function AddPromoter() {
         await postPromoters(data)
         e.target.reset()
     }
-    //renders 
+
+    //submission handler for organisation 
+
+    const handleOrgSubmit = async (e) => {
+        e.preventDefault()
+            console.log("submitted")
+        const data = {
+            company_name: e.target.company_name.value,
+            company_email: e.target.company_email.value,
+            company_street: e.target.company_street.value,
+            company_street_num: e.target.company_street_num.value,
+            company_postcode: e.target.company_postcode.value,
+            company_city: e.target.company_city.value,
+            company_state: e.target.company_state.value,
+            company_country: e.target.company_country.value
+        }
+        console.log(data)
+        setOrgFormInput(data)
+        await postOrg(data)
+        e.target.reset()
+    }
+
+    // Sets state of checkbox, which renders correct form 
+    const handleChange = (e) => {
+        setFormType(e.target.checked)
+        console.log(formType)
+        setSubmitSuccess(false)
+    }
+
+    function FormRender(){
+        if(formType === false){
+            return <FormInd handleSubmit={handleSubmit}/>
+
+        }
+        return <FormOrg handleOrgSubmit={handleOrgSubmit}/>
+    }
+
+
+    //renders confirmation upon successful submission 
     function UploadSuccessful(){
         if(submitSuccess === true){
             return <div>Thanks, your submission has been added to the database.</div>
@@ -85,32 +163,24 @@ export default function AddPromoter() {
     }
 
     return (
-    <Layout>
-    <Head>
-        <title>Promoter Blacklist - add</title>
-    </Head>
-    <h1>Add a promoter</h1>
-    <div className='form-containter'>
-        <form className='form-flow' onSubmit={handleSubmit}>
-            <ul>
-                <li><label htmlFor="firstName" >First name: </label><input name='first' type="text" /></li>
-                <li><label htmlFor="last-name">Last name: </label><input name='last'  type="text" /></li>
-                <li><label htmlFor="company-name">Company: </label><input name='company' type="text" /></li>
-                <li><label htmlFor="email">Email: </label><input name='email' type="email" /></li>
-                <li><label htmlFor="phone-number">Ph number: </label><input name='phone' type="number" /></li>
-                <li><label htmlFor="country">Country: </label><input name='country' type="text" /></li>
-                <li><label htmlFor="description">Description of incident: </label><textarea name='description' name="description" id="description" cols="30" rows="10"></textarea></li>
-                <li><input className='button' type="submit" value="Send Request"/></li>
-            </ul>
-
-        </form>
-        <div>   
+      <Layout>
+        <Head>
+          <title>Promoter Blacklist - add</title>
+        </Head>
+        <div className="form-containter">
+            <div className="selector">
+                <div>Add an individual</div>
+                <label class="switch">
+                <input type="checkbox" onChange={handleChange}/>
+                <span class="slider round"></span>
+                </label>
+                <div>Add an organisation</div>
+            </div>
+            <FormRender />
+          <div></div>
+          <UploadSuccessful />
         </div>
-        <UploadSuccessful />
-    </div>
-    <p>
-    </p>
-    
-    </Layout>
-    )
+        <p></p>
+      </Layout>
+    );
   }

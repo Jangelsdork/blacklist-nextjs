@@ -1,17 +1,14 @@
 import { getConnection } from "../../../../utils/planetscale";
 
 export default async function handler(req, res) {
-  const { search } = req.query;
+  const { searchorg } = req.query;
   const conn = getConnection();
 
   const results = await conn.execute(
-    `select first, last, id, user 
-    from Promoter 
-    where first like '%${search}%'
-    or last like '%${search}%'
-    or country like '%${search}%'
-    or email like '%${search}%'
-    or country like '%${search}%'
+    `select company_name, company_country, id 
+    from Company 
+    where company_name like '%${searchorg}%'
+    or company_email like '%${searchorg}%'
     `);
     
   const response = results;

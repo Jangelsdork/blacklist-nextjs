@@ -1,11 +1,21 @@
 
 export default function Navbar(){
-    return(
+
+function NewEntryButton(){
+    return (
+    <>
+        <button>New Entry</button>
+    </>
+    )
+}
+
+    return
+    (
      <div className='navbar'>
         <Link href="/">Home</Link>
         <Link href="/newSearch">Search</Link>
-        <Link href="/add">New Entry</Link>
+        <NewEntryButton />
         <Link href="/about">About</Link>
     </div>
     )
-}
+}   
