@@ -2,12 +2,15 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useAuth } from "@clerk/nextjs";
+import FormInd from "../../components/Formind";
 
 export default function Page() {
   const router = useRouter();
   const { userId } = useAuth();
   const [onePromoter, setOnePromoter] = useState();
   const [submittedBy, setSubmittedBy] = useState(false);
+  const [loadEditForm, setLoadEditForm] = useState(false)
+  const [loadSearch, setLoadSearch] = useState(false)
 
   const id = router.query.id;
   const getOnePromoter = async () => {
@@ -27,15 +30,51 @@ export default function Page() {
     }
   });
 
+  //changes state which will trigger the form to appear
+  function handleClickEdit(){
+    setLoadEditForm(Boolean=!Boolean)
+  }
+
+  //changes state which will trigger the search dialogue to appear
+  function handleClickLink(){
+    setLoadSearch(Boolean=!Boolean)
+  }
+
+  function EditForm(){
+    if(loadEditForm===true){
+      return (<FormInd parent={"Edit"}/>)
+    }
+    return <div></div>
+  }
+
+
+  function SearchBox(){
+    if(loadSearch===true){
+      return (
+        <form class="searchBar" onSubmit={handleSubmit} >
+         <input type="text" placeholder="not yet implemented..." name="search" />
+            <button type="submit" value="Search Database">SEARCH</button>
+        </form>
+      )
+    }
+    return <div></div>
+  }
+
+  function handleSubmit(e){
+    e.preventDefault()
+    console.log("submitted")
+    alert("this feature is not yet implemented")
+  }
+  
   //display user tools if user was author of entry
   function UserTools() {
     console.log(userId + submittedBy);
     if (userId === submittedBy)
       return (
         <div className="user-tools">
-          <div>Edit</div>
-          <div>Delete</div>
-          <div>Link to an organisation</div>
+          <button onClick={handleClickEdit}>Edit</button>
+          <button onClick={handleSubmit}>Delete</button>
+          <button onClick={handleClickLink}>Link to an organisation</button>
         </div>
       );
   }
@@ -53,6 +92,8 @@ export default function Page() {
             Description of the incident: {onePromoter.description}
           </div>
           <UserTools />
+          <EditForm />
+          <SearchBox />
         </div>
       );
     }

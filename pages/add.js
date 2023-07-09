@@ -7,6 +7,7 @@ import { useAuth } from '@clerk/nextjs';
 import moment from 'moment';
 import FormInd from '../components/Formind';
 import FormOrg from '../components/formorg';
+import { nanoid } from 'nanoid';
 
 
 
@@ -148,7 +149,7 @@ export default function AddPromoter() {
 
     function FormRender(){
         if(formType === false){
-            return <FormInd handleSubmit={handleSubmit}/>
+            return <FormInd handleSubmit={handleSubmit} parent={"Add"}/>
 
         }
         return <FormOrg handleOrgSubmit={handleOrgSubmit}/>
