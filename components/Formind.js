@@ -1,7 +1,11 @@
-export default function FormInd({handleSubmit}){
+import { useState } from "react"
+
+export default function FormInd({handleSubmit, parent}){
+
+
 return(
 <form className="form-flow" onSubmit={handleSubmit}>
-<h1>Add an individual</h1>
+<h1>{parent} an individual</h1>
   <ul>
     <li>
       <label htmlFor="firstName">First name: </label>

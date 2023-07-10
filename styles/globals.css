@@ -88,17 +88,33 @@ textarea {
   height: 5em;
 }
 
-.button {
+button, .button {
   /* Align buttons with the text fields */
   margin-left: 130px;
+  background-color: grey;
+  border: none;
+  color: black;
+  padding: 10px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: medium;
+
+}
+button:hover, .button:hover{
+  cursor: pointer;
+  background-color: rgb(175, 174, 174);
+
 }
 
-button {
   /* This extra margin represent roughly the same space as the space
      between the labels and their text fields */
+
+/* button, .button {
+
   margin-left: 50px;
   text-align: right;
-}
+} */
 
 .header {
   background-color: antiquewhite;

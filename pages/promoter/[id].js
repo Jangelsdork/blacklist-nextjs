@@ -11,7 +11,14 @@ export default function Page() {
   const [submittedBy, setSubmittedBy] = useState(false);
   const [loadEditForm, setLoadEditForm] = useState(false)
   const [loadSearch, setLoadSearch] = useState(false)
+  //value entered into the search box 
+  const [searchValue, setSearchValue] = useState()
+  
+  //value returned by the api endpoint 
+  const [returnSearchValue, setReturnSearchValue] = useState()
 
+
+  // gets the data relating to the specific promoter whose ID matches the URL
   const id = router.query.id;
   const getOnePromoter = async () => {
     try {
@@ -23,6 +30,25 @@ export default function Page() {
       console.log(error);
     }
   };
+  // gets the name and id of promoter entered in the search box to "link to an organisation"
+  const getSearchSuggestions = async () => {
+    console.log(searchValue)
+    try {
+      const res = await fetch("/api/promoter/link/" + searchValue );
+      const data = await res.json();
+      setReturnSearchValue(data.response);
+      console.log(returnSearchValue)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleChange = (e) =>{
+    const searchInputBox = e.target.value;
+    setSearchValue(searchInputBox)
+    getSearchSuggestions()
+    console.log("changed");
+  }
 
   useEffect(() => {
     if (!onePromoter) {
@@ -51,9 +77,8 @@ export default function Page() {
   function SearchBox(){
     if(loadSearch===true){
       return (
-        <form class="searchBar" onSubmit={handleSubmit} >
+        <form class="searchBar" onChange={handleChange} key="password"  >
          <input type="text" placeholder="not yet implemented..." name="search" />
-            <button type="submit" value="Search Database">SEARCH</button>
         </form>
       )
     }
@@ -81,7 +106,6 @@ export default function Page() {
 
   function DisplayPromoter() {
     if (onePromoter) {
-      console.log(onePromoter);
       return (
         <div className="results-container">
           <div className="promoterName">
