@@ -4,7 +4,7 @@ import Link from 'next/link'
 export default function Layout({ children }) {
 
     return (
-    <div className={styles.container}>
+    <div>
        <div className='navbar'>
         <Link href="/">Home</Link>
         <Link href="/newSearch">Search</Link>
