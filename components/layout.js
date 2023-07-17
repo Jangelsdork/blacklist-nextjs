@@ -11,8 +11,11 @@ export default function Layout({ children }) {
         <Link href="/add">Add new entry</Link>
         <Link href="/about">About</Link>
 
-    </div>
-      {children}</div>
+      </div>
+      <div className='container-main'>
+      {children}
+      </div>
+      </div>
     )
     
   }

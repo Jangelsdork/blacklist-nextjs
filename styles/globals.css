@@ -6,7 +6,7 @@ body {
   background-color: #2f2f2f;
   color: white;
   padding: 0;
-  margin: 40px;
+  /* margin: 40px; */
   font-family: 'Open Sans', sans-serif;
   line-height: 1.6;
   font-size: 18px;
@@ -92,7 +92,7 @@ textarea {
 button, .button {
   /* Align buttons with the text fields */
   /* margin-left: 130px; */
-  margin: 10px;
+  margin: 40px;
   background-color: grey;
   border: none;
   color: black;
@@ -126,7 +126,7 @@ button:hover, .button:hover{
 /* Style the navbar */
 .navbar {
   overflow: hidden;
-  background-color: #333;
+  background-color: #686767;
   width: 100%;
 }
 
@@ -261,4 +261,9 @@ input:checked + .slider:before {
   justify-content: center ;
   align-items: center;
   max-width: 40vw;
+  min-width: 360px;
+}
+
+.container-main {
+  padding: 40px;
 }
