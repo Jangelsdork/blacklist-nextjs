@@ -168,7 +168,7 @@ export default function AddPromoter() {
         <Head>
           <title>Promoter Blacklist - add</title>
         </Head>
-        <div className="form-containter">
+        <div className="form-container">
             <div className="selector">
                 <div>Add an individual</div>
                 <label class="switch">
