@@ -9,14 +9,13 @@ export default function Page() {
   const { userId } = useAuth();
   const [onePromoter, setOnePromoter] = useState();
   const [submittedBy, setSubmittedBy] = useState(false);
-  const [loadEditForm, setLoadEditForm] = useState(false)
-  const [loadSearch, setLoadSearch] = useState(false)
-  //value entered into the search box 
-  const [searchValue, setSearchValue] = useState()
-  
-  //value returned by the api endpoint 
-  const [returnSearchValue, setReturnSearchValue] = useState()
+  const [loadEditForm, setLoadEditForm] = useState(false);
+  const [loadSearch, setLoadSearch] = useState(false);
+  //value entered into the search box
+  const [searchValue, setSearchValue] = useState();
 
+  //value returned by the api endpoint
+  const [returnSearchValue, setReturnSearchValue] = useState();
 
   // gets the data relating to the specific promoter whose ID matches the URL
   const id = router.query.id;
@@ -32,23 +31,23 @@ export default function Page() {
   };
   // gets the name and id of promoter entered in the search box to "link to an organisation"
   const getSearchSuggestions = async () => {
-    console.log(searchValue)
+    console.log(searchValue);
     try {
-      const res = await fetch("/api/promoter/link/" + searchValue );
+      const res = await fetch("/api/promoter/link/" + searchValue);
       const data = await res.json();
       setReturnSearchValue(data.response);
-      console.log(returnSearchValue)
+      console.log(returnSearchValue);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const handleChange = (e) =>{
+  const handleChange = (e) => {
     const searchInputBox = e.target.value;
-    setSearchValue(searchInputBox)
-    getSearchSuggestions()
-    console.log("changed");
-  }
+    setSearchValue(searchInputBox);
+    getSearchSuggestions();
+    // console.log("changed");
+  };
 
   useEffect(() => {
     if (!onePromoter) {
@@ -57,76 +56,71 @@ export default function Page() {
   });
 
   //changes state which will trigger the form to appear
-  function handleClickEdit(){
-    setLoadEditForm(Boolean=!Boolean)
+  function handleClickEdit() {
+    setLoadEditForm(!loadEditForm);
   }
 
   //changes state which will trigger the search dialogue to appear
-  function handleClickLink(){
-    setLoadSearch(Boolean=!Boolean)
+  function handleClickLink() {
+    setLoadSearch(!loadSearch);
   }
 
-  function EditForm(){
-    if(loadEditForm===true){
-      return (<FormInd parent={"Edit"}/>)
-    }
-    return <div></div>
+  function EditForm() {
+    return <FormInd parent={"Edit"} />;
   }
 
-
-  function SearchBox(){
-    if(loadSearch===true){
-      return (
-        <form class="searchBar" onChange={handleChange} key="password"  >
-         <input type="text" placeholder="not yet implemented..." name="search" />
-        </form>
-      )
-    }
-    return <div></div>
+  function SearchBox() {
+    return (
+      <form className="searchBar" key="password">
+        <input
+          type="text"
+          placeholder="not yet implemented..."
+          name="search"
+          value={searchValue}
+          onChange={handleChange}
+        />
+      </form>
+    );
   }
 
-  function handleSubmit(e){
-    e.preventDefault()
-    console.log("submitted")
-    alert("this feature is not yet implemented")
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log("submitted");
+    alert("this feature is not yet implemented");
   }
-  
+
   //display user tools if user was author of entry
   function UserTools() {
     console.log(userId + submittedBy);
-    if (userId === submittedBy)
-      return (
-        <div className="user-tools">
-          <button onClick={handleClickEdit}>Edit</button>
-          <button onClick={handleSubmit}>Delete</button>
-          <button onClick={handleClickLink}>Link to an organisation</button>
-        </div>
-      );
+    return (
+      <div className="user-tools">
+        <button onClick={handleClickEdit}>Edit</button>
+        <button onClick={handleSubmit}>Delete</button>
+        <button onClick={handleClickLink}>Link to an organisation</button>
+      </div>
+    );
   }
 
   function DisplayPromoter() {
-    if (onePromoter) {
-      return (
-        <div className="results-container">
-          <div className="promoterName">
-            Name: {onePromoter.first} {onePromoter.last}
-          </div>
-          <div className="promoterCountry">Country: {onePromoter.country}</div>
-          <div className="promoterIncident">
-            Description of the incident: {onePromoter.description}
-          </div>
-          <UserTools />
-          <EditForm />
-          <SearchBox />
+    return (
+      <div className="results-container">
+        <div className="promoterName">
+          Name: {onePromoter.first} {onePromoter.last}
         </div>
-      );
-    }
-    return <div>///LOADING///</div>;
+        <div className="promoterCountry">Country: {onePromoter.country}</div>
+        <div className="promoterIncident">
+          Description of the incident: {onePromoter.description}
+        </div>
+        {userId === submittedBy && <UserTools />}
+        {loadEditForm && <EditForm />}
+        {loadSearch && <SearchBox />}
+      </div>
+    );
   }
 
   return (
     <>
-      <DisplayPromoter />
+      {onePromoter ? <DisplayPromoter /> : <div>///LOADING///</div>}
 
       <Link href="/">Back to home</Link>
     </>
