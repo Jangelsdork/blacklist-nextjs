@@ -4,23 +4,20 @@ import { useState } from "react";
 import Layout from "../components/layout";
 
 export default function NewSearch() {
-
   const [searchResults, setSearchResults] = useState();
   const [orgSearchResults, setOrgSearchResults] = useState();
-  const [currentUser,setCurrentUser] = useState(); 
-  const { userId } = useAuth()
+  const [currentUser, setCurrentUser] = useState();
+  const { userId } = useAuth();
 
- 
-  let search = ""
+  let search = "";
 
-  
   const searchPromoters = async () => {
     try {
       const res = await fetch("/api/promoter/search/" + search);
-      console.log(res)
+      console.log(res);
       const data = await res.json();
       setSearchResults(data);
-      console.log(data)
+      console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -28,10 +25,10 @@ export default function NewSearch() {
   const searchOrganisations = async () => {
     try {
       const res = await fetch("/api/promoter/searchorg/" + search);
-      console.log(res)
+      console.log(res);
       const data = await res.json();
       setOrgSearchResults(data);
-      console.log(data)
+      console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -43,7 +40,6 @@ export default function NewSearch() {
   //   }
 
   //           }
-  
 
   //takes the data returned from the individuals database, creates a jsx line containing the first and the last name, with a hyperlink to the promoter page
   function IsData() {
@@ -54,10 +50,20 @@ export default function NewSearch() {
         </Link>
       </li>
     ));
-    if(searchResults.response.rows != 0){
-    return <div><h1>Promoters</h1><div>{eachPromoter}</div></div>
+    if (searchResults.response.rows != 0) {
+      return (
+        <div>
+          <h1>Promoters</h1>
+          <div>{eachPromoter}</div>
+        </div>
+      );
     }
-    return <div><h1>Promoters</h1><div>No individuals in our database matching your search query</div></div>
+    return (
+      <div>
+        <h1>Promoters</h1>
+        <div>No individuals in our database matching your search query</div>
+      </div>
+    );
   }
 
   //takes the data returned from the organisations database, creates a jsx line containing the first and the last name, with a hyperlink to the promoter page
@@ -69,58 +75,81 @@ export default function NewSearch() {
         </Link>
       </li>
     ));
-    if(orgSearchResults.response.rows != 0){
-    return <div><h1>Organisations</h1><div>{eachOrg}</div></div>;
+    if (orgSearchResults.response.rows != 0) {
+      return (
+        <div>
+          <h1>Organisations</h1>
+          <div>{eachOrg}</div>
+        </div>
+      );
     }
-    return <div><h1>Organisations</h1><div>No organisations in our database matching your search query</div></div>
+    return (
+      <div>
+        <h1>Organisations</h1>
+        <div>No organisations in our database matching your search query</div>
+      </div>
+    );
   }
 
   // displays if data hasn't been returned
   function IsNoData() {
-    return <div></div>
+    return <div></div>;
   }
 
   // Component that displays different content depending if database has loaded or not.
   function DisplayIndData() {
     if (searchResults) {
-      return <div><IsData /> </div>
+      return (
+        <div>
+          <IsData />{" "}
+        </div>
+      );
     }
-    return <IsNoData />
+    return <IsNoData />;
   }
   // Component that displays different content depending if database has loaded or not.
   function DisplayOrgData() {
     if (orgSearchResults) {
-      return <div><IsDataOrg /> </div>
+      return (
+        <div>
+          <IsDataOrg />{" "}
+        </div>
+      );
     }
-    return <IsNoData />
+    return <IsNoData />;
   }
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    const searchQuery = e.target.search.value
-    search = searchQuery
-    searchPromoters()
-    searchOrganisations()
-    return search
-    
-  }
+    e.preventDefault();
+    const searchQuery = e.target.search.value;
+    search = searchQuery;
+    searchPromoters();
+    searchOrganisations();
+    return search;
+  };
 
-
-return (
+  return (
     <Layout>
-        <h4>You can search for individuals by name, email, or country.<br></br><br></br>
-          Companies can be searched by company name, or email. You can do a partial email search by only entering the domain. <br></br><br></br>
-          
-          Click on the results to see more information about an individual entry. If you are the author of an entry, you can link the entry to a company/individual, edit, update, or delete the entry. </h4>
-        <form class="searchBar" onSubmit={handleSubmit} >
-         <input type="text" placeholder="Search..." name="search" />
-            <button type="submit" value="Search Database">SEARCH</button>
-        </form>
+      <h4>
+        You can search for individuals by name, email, or country.<br></br>
+        <br></br>
+        Companies can be searched by company name, or email. You can do a
+        partial email search by only entering the domain. <br></br>
+        <br></br>
+        Click on the results to see more information about an individual entry.
+        If you are the author of an entry, you can link the entry to a
+        company/individual, edit, update, or delete the entry.{" "}
+      </h4>
+      <form className="searchBar" onSubmit={handleSubmit}>
+        <input type="text" placeholder="Search..." name="search" />
+        <button type="submit" value="Search Database">
+          SEARCH
+        </button>
+      </form>
 
-        <DisplayIndData /> 
-        <DisplayOrgData />
-        <Link href="/">Back home</Link>
+      <DisplayIndData />
+      <DisplayOrgData />
+      <Link href="/">Back home</Link>
     </Layout>
-)
-
+  );
 }
