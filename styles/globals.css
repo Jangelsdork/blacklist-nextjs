@@ -44,8 +44,9 @@ form {
    max-width: 60vw;
    /* Form outline */
    padding: 1em;
-   border: 1px solid #ccc;
-   border-radius: 1em;
+   background-color: #212121;
+   /* border: 1px solid #ccc; */
+   /* border-radius: 1em; */
 }
 
 
@@ -61,24 +62,37 @@ label {
 }
 
 input,
-textarea {
+textarea,
+input::placeholder,
+textarea::placeholder {
   /* To make sure that all text fields have the same font settings
      By default, textareas have a monospace font */
   font: 1em sans-serif;
-  background-color: #999;
+  color: #afafaf;
+  background-color: #212121;
 
   /* Uniform text field size */
   max-width: 70vw;
   box-sizing: border-box;
 
   /* Match form field borders */
-  border: 1px solid #999;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #999;
+
 }
+
+
+
 
 input:focus,
 textarea:focus {
   /* Additional highlight for focused elements */
-  border-color: #000;
+  border: none;
+  outline: none;
+  border-bottom: 2px solid #999;
+  margin-bottom: -1px;
+  color: #ffffff;
 }
 
 textarea {

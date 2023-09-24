@@ -8,32 +8,33 @@ return(
 <h1>{parent} an individual</h1>
   <ul>
     <li>
-      <label htmlFor="firstName">First name: </label>
-      <input name="first" type="text" />
+      <label htmlFor="firstName"></label>
+      <input name="first" type="text" placeholder="First name:" />
     </li>
     <li>
-      <label htmlFor="last-name">Last name: </label>
-      <input name="last" type="text" />
+      <label htmlFor="last-name"></label>
+      <input name="last" type="text" placeholder="Last name: " />
     </li>
     <li>
-      <label htmlFor="email">Email: </label>
-      <input name="email" type="email" />
+      <label htmlFor="email"></label>
+      <input name="email" type="email" placeholder="Email: "/>
     </li>
     <li>
-      <label htmlFor="phone-number">Ph number: </label>
-      <input name="phone" type="number" />
+      <label htmlFor="phone-number"> </label>
+      <input name="phone" type="number" placeholder="Ph number:" />
     </li>
     <li>
-      <label htmlFor="country">Country: </label>
-      <input name="country" type="text" />
+      <label htmlFor="country"> </label>
+      <input name="country" type="text" placeholder="Country:" />
     </li>
     <li>
-      <label htmlFor="description">Description of incident: </label>
+      <label htmlFor="description"> </label>
       <textarea
         name="description"
         id="description"
         cols="30"
         rows="10"
+        placeholder="Description of incident:"
       ></textarea>
     </li>
 
