@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useAuth } from "@clerk/nextjs";
 import DisplayPromoter from "../../components/DisplayPromoter";
+import Layout from "../../components/layout";
 
 export default function Page() {
   const router = useRouter();
@@ -27,7 +28,7 @@ export default function Page() {
   }, []);
 
   return (
-    <>
+    <Layout>
       {onePromoter ? (
         <DisplayPromoter
           onePromoter={onePromoter}
@@ -39,6 +40,6 @@ export default function Page() {
       )}
 
       <Link href="/">Back to home</Link>
-    </>
+    </Layout>
   );
 }

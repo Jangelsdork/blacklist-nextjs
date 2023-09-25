@@ -62,9 +62,7 @@ label {
 }
 
 input,
-textarea,
-input::placeholder,
-textarea::placeholder {
+textarea {
   /* To make sure that all text fields have the same font settings
      By default, textareas have a monospace font */
   font: 1em sans-serif;
@@ -93,6 +91,10 @@ textarea:focus {
   border-bottom: 2px solid #999;
   margin-bottom: -1px;
   color: #ffffff;
+}
+input:focus::placeholder, 
+textarea:focus::placeholder {
+  color: #c4c3c3;
 }
 
 textarea {

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useAuth } from "@clerk/nextjs";
 import FormInd from "../../components/Formind";
+import Layout from "../../components/layout";
 
 export default function Page() {
   const router = useRouter();
@@ -128,10 +129,10 @@ export default function Page() {
   }
 
   return (
-    <>
+    <Layout>
       <DisplayPromoter />
 
       <Link href="/">Back to home</Link>
-    </>
+    </Layout>
   );
 }
