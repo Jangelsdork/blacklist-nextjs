@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useState } from "react";
 import Layout from "../components/layout";
 
+
 export default function NewSearch() {
   const [searchResults, setSearchResults] = useState();
   const [orgSearchResults, setOrgSearchResults] = useState();
