@@ -11,7 +11,6 @@ export default function App({ Component, pageProps }) {
 
     <ClerkProvider>
       <SignedIn>
-        <UserButton />
         <Component {...pageProps} />
       </SignedIn>
       <SignedOut>

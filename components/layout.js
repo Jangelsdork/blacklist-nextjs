@@ -1,5 +1,6 @@
 import styles from './layout.module.css'
 import Link from 'next/link'
+import { UserButton } from '@clerk/nextjs'
 
 
 export default function Layout({ children }) {
@@ -7,6 +8,7 @@ export default function Layout({ children }) {
     return (
     <div>
        <div className='navbar'>
+        <UserButton />
         <Link href="/">Home</Link>
         <Link href="/newSearch">Search</Link>
         <Link href="/add">Add new entry</Link>

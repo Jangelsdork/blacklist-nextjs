@@ -144,6 +144,9 @@ button:hover, .button:hover{
   overflow: hidden;
   background-color: #686767;
   width: 100%;
+  display: flex;
+  padding-left: 30px;
+  align-items: center;
 }
 
 /* Navbar links */
@@ -282,4 +285,9 @@ input:checked + .slider:before {
 
 .container-main {
   padding: 40px;
+}
+
+.userbutton {
+  padding: 10px;
+  margin:10px
 }
