@@ -36,12 +36,21 @@ export default function DisplayPromoter({ onePromoter, userId, submittedBy }) {
 
   return (
     <div className="results-container">
-      <div className="promoterName">
-        Name: {onePromoter.first} {onePromoter.last}
-      </div>
-      <div className="promoterCountry">Country: {onePromoter.country}</div>
-      <div className="promoterIncident">
-        Description of the incident: {onePromoter.description}
+      <div className="results-inner">
+        <h3>Incident Report - Ref: {onePromoter.id}</h3>
+        <div>Report received: {onePromoter.submissionDate}</div>
+        <div className="promoterName">
+          Name: {onePromoter.first} {onePromoter.last}
+        </div>
+        <div className="promoterCountry">Country: {onePromoter.country}</div>
+        <div className="promoterIncident">
+          Description of the incident: {onePromoter.description}
+        </div>
+        <div>Related companies: </div>
+        <div>
+          Status:
+        </div>
+
       </div>
       {userId === submittedBy && (
         <UserTools

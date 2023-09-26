@@ -13,6 +13,8 @@ body {
   font-family: 'Open Sans', sans-serif;
   line-height: 1.6;
   font-size: 18px;
+  
+
 }
 
 * {
@@ -293,4 +295,9 @@ input:checked + .slider:before {
 .userbutton {
   padding: 10px;
   margin:10px
+}
+
+.results-inner {
+  font-size:medium;
+  font-weight: 400;
 }
