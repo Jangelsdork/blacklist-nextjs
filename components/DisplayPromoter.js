@@ -12,10 +12,16 @@ export default function DisplayPromoter({ onePromoter, userId, submittedBy }) {
     setLoadEditForm(!loadEditForm);
   }
 
-  function handleSubmit(e) {
+  // this function allows user to delete an entry (if they are also the one who created it)
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("submitted");
-    alert("this feature is not yet implemented");
+    try {
+      const res = await fetch("/api/promoter/delete/promoter/" + onePromoter.id)
+      const data = await res.json()
+      if(data){alert("Incident has been successfully deleted")}
+    } catch (error){
+    alert("Could not delete entry")
+    }
   }
 
   function handleClickLink(loadSearch) {

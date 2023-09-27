@@ -11,6 +11,7 @@ export default function Page() {
   const { userId } = useAuth();
   const [onePromoter, setOnePromoter] = useState();
   const [submittedBy, setSubmittedBy] = useState(false);
+  const [loadContent, setLoadContent] = useState(<div>Loading...</div>)
 
   const getOnePromoter = async (id) => {
     try {
@@ -18,10 +19,15 @@ export default function Page() {
       const data = await res.json();
       setOnePromoter(data.response.rows[0]);
       setSubmittedBy(data.response.rows[0].user);
+      console.log(submittedBy)
     } catch (error) {
       console.log(error);
+      setLoadContent(<div>Sorry, that entry doesn't exist</div>)
+
+      
     }
   };
+
 
   useEffect(() => {
     getOnePromoter(id);
@@ -36,7 +42,7 @@ export default function Page() {
           submittedBy={submittedBy}
         />
       ) : (
-        <div>///LOADING///</div>
+        <div className="loadContent">{loadContent}</div>
       )}
 
       <Link href="/">Back to home</Link>

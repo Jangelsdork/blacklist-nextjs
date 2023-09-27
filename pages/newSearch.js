@@ -131,7 +131,11 @@ export default function NewSearch() {
 
   return (
     <Layout>
-      <h4>
+      <h1>
+        Search for a promoter or an individual
+      </h1>
+
+        <div>
         You can search for individuals by name, email, or country.<br></br>
         <br></br>
         Companies can be searched by company name, or email. You can do a
@@ -140,7 +144,7 @@ export default function NewSearch() {
         Click on the results to see more information about an individual entry.
         If you are the author of an entry, you can link the entry to a
         company/individual, edit, update, or delete the entry.{" "}
-      </h4>
+        </div>
       <form className="searchBar" onSubmit={handleSubmit}>
         <input type="text" placeholder="Search..." name="search" />
         <button type="submit" value="Search Database">

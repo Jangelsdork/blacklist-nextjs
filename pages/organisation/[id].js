@@ -112,8 +112,10 @@ export default function Page() {
     if (oneOrganisation) {
       return (
         <div className="results-container">
+            <div className="results-inner">
           <div className="Organisation name:">
             Name: {oneOrganisation.company_name}
+          </div>
           </div>
           {/* <div className="promoterCountry">Country: {onePromoter.country}</div>
           <div className="promoterIncident">
