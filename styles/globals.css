@@ -286,6 +286,7 @@ input:checked + .slider:before {
   align-items: center;
   max-width: 40vw;
   min-width: 360px;
+  margin-top: 50px;
 }
 
 .container-main {

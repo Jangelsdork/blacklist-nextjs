@@ -45,7 +45,7 @@ export default function Page() {
         <div className="loadContent">{loadContent}</div>
       )}
 
-      <Link href="/">Back to home</Link>
+      <Link href="/newSearch">Back to Search</Link>
     </Layout>
   );
 }
