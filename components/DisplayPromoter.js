@@ -8,6 +8,7 @@ export default function DisplayPromoter({ onePromoter, userId, submittedBy, getO
   const [returnSearchValue, setReturnSearchValue] = useState();
 
   const  handleClickEdit = async ()  => {
+    
     try {
       const res = await fetch("/api/promoter/status/" + onePromoter.id)
       console.log("/api/promoter/status/" + onePromoter.id)
@@ -86,7 +87,7 @@ export default function DisplayPromoter({ onePromoter, userId, submittedBy, getO
         </div>
         <div>Related companies: </div>
         <div className="status-line">
-          Status: <StatusWidget />
+          Status: <StatusWidget /> {onePromoter.dateResolved}
         </div>
 
       </div>
@@ -95,6 +96,7 @@ export default function DisplayPromoter({ onePromoter, userId, submittedBy, getO
           handleClickEdit={handleClickEdit}
           handleSubmit={handleSubmit}
           handleClickLink={() => handleClickLink(loadSearch)}
+          status={onePromoter.status}
         />
       )}
       {/* {loadEditForm && <EditForm />} */}
