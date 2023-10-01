@@ -302,3 +302,15 @@ input:checked + .slider:before {
   font-size:medium;
   font-weight: 400;
 }
+
+.status-line {
+  display: flex;
+  flex-direction: row;
+}
+
+.status-true{
+  color: green;
+}
+.status-false{
+  color: yellow;
+}

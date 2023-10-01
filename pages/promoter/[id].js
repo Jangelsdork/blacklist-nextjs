@@ -40,6 +40,7 @@ export default function Page() {
           onePromoter={onePromoter}
           userId={userId}
           submittedBy={submittedBy}
+          getOnePromoter={getOnePromoter}
         />
       ) : (
         <div className="loadContent">{loadContent}</div>

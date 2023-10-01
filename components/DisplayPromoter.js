@@ -3,7 +3,7 @@ import UserTools from "./UserTools";
 import EditForm from "./EditForm";
 import SearchBox from "./SearchBox";
 
-export default function DisplayPromoter({ onePromoter, userId, submittedBy }) {
+export default function DisplayPromoter({ onePromoter, userId, submittedBy, getOnePromter }) {
   const [loadEditForm, setLoadEditForm] = useState(false);
   const [loadSearch, setLoadSearch] = useState(false);
   const [returnSearchValue, setReturnSearchValue] = useState();
@@ -18,7 +18,10 @@ export default function DisplayPromoter({ onePromoter, userId, submittedBy }) {
     try {
       const res = await fetch("/api/promoter/delete/promoter/" + onePromoter.id)
       const data = await res.json()
-      if(data){alert("Incident has been successfully deleted")}
+      if(data){
+        alert("Incident has been successfully deleted");
+    }
+
     } catch (error){
     alert("Could not delete entry")
     }
@@ -26,6 +29,24 @@ export default function DisplayPromoter({ onePromoter, userId, submittedBy }) {
 
   function handleClickLink(loadSearch) {
     setLoadSearch(!loadSearch);
+  }
+
+  // if the status on the database is true, returns notification that the report is active 
+  function StatusWidget(){
+    console.log(onePromoter)
+    if(onePromoter.status === 1)
+    return(
+      <div className="status-true">Report is active</div>
+    )
+    else if(onePromoter.status=== 0)
+    return(
+    <div className="status-false">Report has been marked as resolved</div>
+    )
+    else
+    return (
+      <div className="status-error"> Status not available</div>
+
+    )
   }
 
   const getSearchSuggestions = async (searchValue) => {
@@ -53,8 +74,8 @@ export default function DisplayPromoter({ onePromoter, userId, submittedBy }) {
           Description of the incident: {onePromoter.description}
         </div>
         <div>Related companies: </div>
-        <div>
-          Status:
+        <div className="status-line">
+          Status: <StatusWidget />
         </div>
 
       </div>
