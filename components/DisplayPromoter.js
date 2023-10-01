@@ -9,7 +9,8 @@ export default function DisplayPromoter({ onePromoter, userId, submittedBy, getO
 
   const  handleClickEdit = async ()  => {
     try {
-      const res = await fetch("/api/promoter/status" + onePromoter.id)
+      const res = await fetch("/api/promoter/status/" + onePromoter.id)
+      console.log("/api/promoter/status/" + onePromoter.id)
       const data = await res.json()
       if(data){
         console.log(data)
@@ -18,6 +19,7 @@ export default function DisplayPromoter({ onePromoter, userId, submittedBy, getO
 
     } catch (error){
     alert("Something went wrong...")
+    console.log(error)
     }
   }
 

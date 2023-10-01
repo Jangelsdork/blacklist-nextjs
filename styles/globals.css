@@ -309,11 +309,11 @@ input:checked + .slider:before {
 }
 
 .status-true{
-  color: green;
+  color: rgb(205, 188, 3);
   padding-left: 4px;
 
 }
 .status-false{
-  color: yellow;
+  color: rgb(70, 212, 89);
   padding-left: 4px;
 }

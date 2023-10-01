@@ -1,10 +1,10 @@
-import { getConnection } from "../../../../../utils/planetscale"
+import { getConnection } from "../../../../utils/planetscale"
 
 export default async function handler(req, res) {
   const { id } = req.query;
   const conn = getConnection();
 
-  const results = await conn.execute(`Set status from Promoter 0 where id = '${id}'`);
+  const results = await conn.execute(`update Promoter set status = 0 where id = '${id}'`);
   
   const response = results
 
