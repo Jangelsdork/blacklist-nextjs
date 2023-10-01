@@ -4,12 +4,21 @@ import EditForm from "./EditForm";
 import SearchBox from "./SearchBox";
 
 export default function DisplayPromoter({ onePromoter, userId, submittedBy, getOnePromter }) {
-  const [loadEditForm, setLoadEditForm] = useState(false);
   const [loadSearch, setLoadSearch] = useState(false);
   const [returnSearchValue, setReturnSearchValue] = useState();
 
-  function handleClickEdit() {
-    setLoadEditForm(!loadEditForm);
+  const  handleClickEdit = async ()  => {
+    try {
+      const res = await fetch("/api/promoter/status" + onePromoter.id)
+      const data = await res.json()
+      if(data){
+        console.log(data)
+        alert("Incident has been successfully updated");
+    }
+
+    } catch (error){
+    alert("Something went wrong...")
+    }
   }
 
   // this function allows user to delete an entry (if they are also the one who created it)
@@ -86,7 +95,7 @@ export default function DisplayPromoter({ onePromoter, userId, submittedBy, getO
           handleClickLink={() => handleClickLink(loadSearch)}
         />
       )}
-      {loadEditForm && <EditForm />}
+      {/* {loadEditForm && <EditForm />} */}
       {loadSearch && <SearchBox getSearchSuggestions={getSearchSuggestions} />}
     </div>
   );
