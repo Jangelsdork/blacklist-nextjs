@@ -13,6 +13,7 @@ export default function DisplayPromoter({ onePromoter, userId, submittedBy, getO
       const res = await fetch("/api/promoter/status/" + onePromoter.id)
       console.log("/api/promoter/status/" + onePromoter.id)
       const data = await res.json()
+      console.log(onePromoter)
       if(data){
         console.log(data)
         alert("Incident has been successfully updated");

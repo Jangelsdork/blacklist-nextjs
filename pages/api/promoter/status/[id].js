@@ -12,8 +12,8 @@ let currentDate = `${day}-${month}-${year}`;
 
   const { id } = req.query;
   const conn = getConnection();
-// add :update promoter set dateResolved = currentDate where id = '${id}'
-  const results = await conn.execute(`update Promoter set status = 0 where id = '${id}' union `);
+// add :update promoter set dateResolved = '${currentDate} where id = '${id}' 
+  const results = await conn.execute(`update Promoter set dateResolved = '${currentDate}'; set status = 0 where id = '${id}'`);
   
   const response = results
 
