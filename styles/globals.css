@@ -315,5 +315,6 @@ input:checked + .slider:before {
 }
 .status-false{
   color: rgb(70, 212, 89);
-  padding-left: 4px;
+  padding-left: 6px;
+  padding-right: 6px;
 }

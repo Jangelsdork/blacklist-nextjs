@@ -53,7 +53,7 @@ export default function DisplayPromoter({ onePromoter, userId, submittedBy, getO
     )
     else if(onePromoter.status=== 0)
     return(
-    <div className="status-false">Report has been marked as resolved</div>
+    <div className="status-false">Report has been marked as resolved as of {onePromoter.dateResolved}</div>
     )
     else
     return (
@@ -88,7 +88,7 @@ export default function DisplayPromoter({ onePromoter, userId, submittedBy, getO
         </div>
         <div>Related companies: </div>
         <div className="status-line">
-          Status: <StatusWidget /> {onePromoter.dateResolved}
+          Status: <StatusWidget />
         </div>
 
       </div>

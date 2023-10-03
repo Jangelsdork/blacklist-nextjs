@@ -12,8 +12,18 @@ let currentDate = `${day}-${month}-${year}`;
 
   const { id } = req.query;
   const conn = getConnection();
+<<<<<<< HEAD
 // add :update promoter set dateResolved = '${currentDate} where id = '${id}' 
   const results = await conn.execute(`update Promoter set dateResolved = '${currentDate}'; set status = 0 where id = '${id}'`);
+=======
+// add :update promoter set dateResolved = currentDate where id = '${id}'
+  // const results = await conn.execute(`update Promoter set status = 0 where id = '${id}' union `);
+  const results = await conn.transaction(async (tx) => {
+    const whenBranch = await tx.execute(`update Promoter set status = 0 where id = '${id}' `)
+    const whenCounter = await tx.execute(`update Promoter set dateResolved = '${currentDate}' where id = '${id}'`)
+    return[whenBranch, whenCounter]
+});
+>>>>>>> f3e9aee (status update api endpoint/database call working, updated status widget ui)
   
   const response = results
 
