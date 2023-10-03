@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import UserTools from "./UserTools";
 import EditForm from "./EditForm";
 import SearchBox from "./SearchBox";
 
-export default function DisplayPromoter({ onePromoter, userId, submittedBy, getOnePromter }) {
+export default function DisplayPromoter({ onePromoter, userId, submittedBy, getOnePromoter, setOnePromoter}) {
   const [loadSearch, setLoadSearch] = useState(false);
   const [returnSearchValue, setReturnSearchValue] = useState();
 
@@ -17,12 +17,15 @@ export default function DisplayPromoter({ onePromoter, userId, submittedBy, getO
       if(data){
         console.log(data)
         alert("Incident has been successfully updated");
+
     }
 
     } catch (error){
     alert("Something went wrong...")
     console.log(error)
     }
+
+    
   }
 
   // this function allows user to delete an entry (if they are also the one who created it)

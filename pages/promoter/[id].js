@@ -38,6 +38,7 @@ export default function Page() {
       {onePromoter ? (
         <DisplayPromoter
           onePromoter={onePromoter}
+          setOnePromoter={setOnePromoter}
           userId={userId}
           submittedBy={submittedBy}
           getOnePromoter={getOnePromoter}
