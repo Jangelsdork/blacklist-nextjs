@@ -16,6 +16,7 @@ export default function DisplayPromoter({ onePromoter, userId, submittedBy, getO
       console.log(onePromoter)
       if(data){
         console.log(data)
+        getOnePromoter(onePromoter.id)
         alert("Incident has been successfully updated");
 
     }
