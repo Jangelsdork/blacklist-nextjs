@@ -5,10 +5,9 @@ export default async function handler(req, res) {
   const conn = getConnection();
 
   const results = await conn.execute(
-    `select first, last, id 
-    from Promoter 
-    where first like '%${id}%'
-    or last like '%${id}%'
+    `select company_name, id 
+    from Company 
+    where company_name like '%${id}%'
     limit 5;
     `);
     

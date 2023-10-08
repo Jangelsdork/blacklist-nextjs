@@ -71,7 +71,7 @@ export default function DisplayPromoter({ onePromoter, userId, submittedBy, getO
     try {
       const res = await fetch("/api/promoter/link/" + searchValue);
       const data = await res.json();
-      setReturnSearchValue(data.response);
+      setReturnSearchValue(data.response.rows);
       console.log(returnSearchValue);
     } catch (error) {
       console.log(error);
@@ -105,7 +105,7 @@ export default function DisplayPromoter({ onePromoter, userId, submittedBy, getO
         />
       )}
       {/* {loadEditForm && <EditForm />} */}
-      {loadSearch && <SearchBox getSearchSuggestions={getSearchSuggestions} />}
+      {loadSearch && <SearchBox getSearchSuggestions={getSearchSuggestions} returnSearchValue={returnSearchValue} />}
     </div>
   );
 }
