@@ -282,6 +282,7 @@ input:checked + .slider:before {
 
 .searchBar{
   display: flex;
+  flex-direction: column;
   justify-content: center ;
   align-items: center;
   max-width: 40vw;
@@ -317,4 +318,17 @@ input:checked + .slider:before {
   color: rgb(70, 212, 89);
   padding-left: 6px;
   padding-right: 6px;
+}
+
+.searchContainer {
+  position: static;
+  bottom:40px;
+  background-color: #686767;
+}
+
+
+.searchItem:hover {
+  background-color: #949494;
+  color: pink;
+
 }

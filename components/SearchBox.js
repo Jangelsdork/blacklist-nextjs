@@ -14,15 +14,14 @@ export default function SearchBox({ getSearchSuggestions, returnSearchValue }) {
   
   const valuesToRender = returnSearchValue.map((line) => (
   
-    console.log(line)
-    // <ul key={index}>
-    //   <li>line</li>
-    // </ul>
+
+      <li className="searchItem">{line.company_name}</li>
+
   ))
 
   if(valuesToRender){
     return(
-      <div>{valuesToRender}</div>
+      <ul className="searchContainer">{valuesToRender}</ul>
 
     )
   } else {

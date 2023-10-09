@@ -5,7 +5,8 @@ import SearchBox from "./SearchBox";
 
 export default function DisplayPromoter({ onePromoter, userId, submittedBy, getOnePromoter, setOnePromoter}) {
   const [loadSearch, setLoadSearch] = useState(false);
-  const [returnSearchValue, setReturnSearchValue] = useState();
+  const [returnSearchValue, setReturnSearchValue] = useState([]);
+
 
   const  handleClickEdit = async ()  => {
     
