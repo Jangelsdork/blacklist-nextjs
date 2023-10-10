@@ -324,11 +324,18 @@ input:checked + .slider:before {
   position: static;
   bottom:40px;
   background-color: #686767;
+  margin: 0px;
+  padding: 0px;
+  max-width: 40vw;
+  margin-top: 4px;
 }
 
+.searchItem {
+  margin: 0px;
+  padding: 0px;
+}
 
 .searchItem:hover {
   background-color: #949494;
   color: pink;
-
 }

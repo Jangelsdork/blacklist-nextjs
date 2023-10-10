@@ -9,7 +9,13 @@ export default function SearchBox({ getSearchSuggestions, returnSearchValue }) {
     getSearchSuggestions(searchInputBox);
     // console.log("changed");
   };
+ 
+  function handleClick(){
+    //get current promoter id, and search promoter id. Pass both values to a (still to be made) api endpoint to link promoter & company. Re-render page so that the connection is displayed.  
+  }
+ 
   // Map over the return search values, return a div with the company name & on click url of api endpoint to link selected company to current promoter id
+  
   function AutoSuggest() {
   
   const valuesToRender = returnSearchValue.map((line) => (
@@ -31,6 +37,7 @@ export default function SearchBox({ getSearchSuggestions, returnSearchValue }) {
   }
   
   return (
+    <div>
     <form className="searchBar" key="password">
       <input
         type="text"
@@ -39,7 +46,9 @@ export default function SearchBox({ getSearchSuggestions, returnSearchValue }) {
         value={searchValue}
         onChange={handleChange}
       />
-      <AutoSuggest />
+      
     </form>
+    <AutoSuggest onClick={handleClick}/>
+    </div>
   );
 }
