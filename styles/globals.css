@@ -337,5 +337,5 @@ input:checked + .slider:before {
 
 .searchItem:hover {
   background-color: #949494;
-  color: pink;
+  cursor: pointer;
 }
