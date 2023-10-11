@@ -332,7 +332,11 @@ input:checked + .slider:before {
 
 .searchItem {
   margin: 0px;
-  padding: 0px;
+  padding-left: 6px;
+  padding-right: 6px;
+  padding-bottom: 2px;
+  font-size: medium;
+
 }
 
 .searchItem:hover {
