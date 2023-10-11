@@ -10,7 +10,8 @@ export default function SearchBox({ getSearchSuggestions, returnSearchValue }) {
     // console.log("changed");
   };
  
-  function handleClick(){
+  const handleClick = (e)=> {
+    console.log(e.target.id)
     //get current promoter id, and search promoter id. Pass both values to a (still to be made) api endpoint to link promoter & company. Re-render page so that the connection is displayed.  
   }
  
@@ -21,7 +22,7 @@ export default function SearchBox({ getSearchSuggestions, returnSearchValue }) {
   const valuesToRender = returnSearchValue.map((line) => (
   
 
-      <li className="searchItem">{line.company_name}</li>
+      <li id={line.id} onClick={handleClick} className="searchItem">{line.company_name}</li>
 
   ))
 
@@ -48,7 +49,7 @@ export default function SearchBox({ getSearchSuggestions, returnSearchValue }) {
       />
       
     </form>
-    <AutoSuggest onClick={handleClick}/>
+    <AutoSuggest />
     </div>
   );
 }
