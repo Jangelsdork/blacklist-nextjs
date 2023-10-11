@@ -106,7 +106,7 @@ export default function DisplayPromoter({ onePromoter, userId, submittedBy, getO
         />
       )}
       {/* {loadEditForm && <EditForm />} */}
-      {loadSearch && <SearchBox getSearchSuggestions={getSearchSuggestions} returnSearchValue={returnSearchValue} />}
+      {loadSearch && <SearchBox getSearchSuggestions={getSearchSuggestions} returnSearchValue={returnSearchValue} onePromoter={onePromoter} />}
     </div>
   );
 }
