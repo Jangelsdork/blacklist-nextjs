@@ -11,23 +11,27 @@ export default function SearchBox({ getSearchSuggestions, returnSearchValue, one
   };
  
   const handleClick = (e)=> {
-    const orgId = e.target.id 
+    const orgId = parseInt(e.target.id)
     const proId = onePromoter.id
 
-    console.log(orgId, proId)
+    const bodyObject = {
+      promoterId: proId, 
+      organisationId: orgId
+    }
 
+    postLink(bodyObject)
     //get current promoter id, and search promoter id. Pass both values to a (still to be made) api endpoint to link promoter & company. Re-render page so that the connection is displayed.  
   }
 
   // api call to post org id and pro id to linking table 
 
-  const postLink = async (promoterData) => { // function needs to be called 
+  const postLink = async (bodyObject) => { // function needs to be called 
     try {
-        const res = await fetch("/api/promoter/postind", // uri needs to be changed (and file needs to be created on the server)
+        const res = await fetch("/api/promoter/link/joinTable", // uri needs to be changed (and file needs to be created on the server)
         {
             method: "POST",
             mode: "cors",
-            body: JSON.stringify(promoterData), //change promoterdata into an object that contains both ids 
+            body: JSON.stringify(bodyObject), 
             headers: {
                 "Content-Type": "application/json",
               },
