@@ -42,7 +42,7 @@ export default function SearchBox({ getSearchSuggestions, returnSearchValue, one
     } catch (error) {
         console.log(error)
     }
- 
+  }
   // Map over the return search values, return a div with the company name & on click url of api endpoint to link selected company to current promoter id
   
   function AutoSuggest() {
