@@ -13,7 +13,6 @@ let currentDate = `${day}-${month}-${year}`;
   const { id } = req.query;
   const conn = getConnection();
 
-  // const results = await conn.execute(`update Promoter set status = 0 where id = '${id}' union `);
   const results = await conn.transaction(async (tx) => {
     const whenBranch = await tx.execute(`update Promoter set status = 0 where id = '${id}' `)
     const whenCounter = await tx.execute(`update Promoter set dateResolved = '${currentDate}' where id = '${id}'`)
