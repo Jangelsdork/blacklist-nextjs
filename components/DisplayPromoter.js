@@ -2,69 +2,67 @@ import { useState, useEffect } from "react";
 import UserTools from "./UserTools";
 import EditForm from "./EditForm";
 import SearchBox from "./SearchBox";
+import LoadLinkedCompanies from "./LoadLinkedCompanies";
 
-export default function DisplayPromoter({ onePromoter, userId, submittedBy, getOnePromoter, setOnePromoter}) {
+export default function DisplayPromoter({
+  onePromoter,
+  userId,
+  submittedBy,
+  getOnePromoter,
+  setOnePromoter,
+}) {
   const [loadSearch, setLoadSearch] = useState(false);
   const [returnSearchValue, setReturnSearchValue] = useState([]);
 
-
-  const  handleClickEdit = async ()  => {
-    
+  const handleClickEdit = async () => {
     try {
-      const res = await fetch("/api/promoter/status/" + onePromoter.id)
-      console.log("/api/promoter/status/" + onePromoter.id)
-      const data = await res.json()
-      console.log(onePromoter)
-      if(data){
-        console.log(data)
-        getOnePromoter(onePromoter.id)
+      const res = await fetch("/api/promoter/status/" + onePromoter.id);
+      console.log("/api/promoter/status/" + onePromoter.id);
+      const data = await res.json();
+      console.log(onePromoter);
+      if (data) {
+        console.log(data);
+        getOnePromoter(onePromoter.id);
         alert("Incident has been successfully updated");
-
+      }
+    } catch (error) {
+      alert("Something went wrong...");
+      console.log(error);
     }
-
-    } catch (error){
-    alert("Something went wrong...")
-    console.log(error)
-    }
-
-    
-  }
+  };
 
   // this function allows user to delete an entry (if they are also the one who created it)
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("/api/promoter/delete/promoter/" + onePromoter.id)
-      const data = await res.json()
-      if(data){
+      const res = await fetch(
+        "/api/promoter/delete/promoter/" + onePromoter.id
+      );
+      const data = await res.json();
+      if (data) {
         alert("Incident has been successfully deleted");
+      }
+    } catch (error) {
+      alert("Could not delete entry");
     }
-
-    } catch (error){
-    alert("Could not delete entry")
-    }
-  }
+  };
 
   function handleClickLink(loadSearch) {
     setLoadSearch(!loadSearch);
   }
 
-  // if the status on the database is true, returns notification that the report is active 
-  function StatusWidget(){
-    console.log(onePromoter)
-    if(onePromoter.status === 1)
-    return(
-      <div className="status-true">Report is active</div>
-    )
-    else if(onePromoter.status=== 0)
-    return(
-    <div className="status-false">Report has been marked as resolved as of {onePromoter.dateResolved}</div>
-    )
-    else
-    return (
-      <div className="status-error"> Status not available</div>
-
-    )
+  // if the status on the database is true, returns notification that the report is active
+  function StatusWidget() {
+    console.log(onePromoter);
+    if (onePromoter.status === 1)
+      return <div className="status-true">Report is active</div>;
+    else if (onePromoter.status === 0)
+      return (
+        <div className="status-false">
+          Report has been marked as resolved as of {onePromoter.dateResolved}
+        </div>
+      );
+    else return <div className="status-error"> Status not available</div>;
   }
 
   const getSearchSuggestions = async (searchValue) => {
@@ -78,7 +76,7 @@ export default function DisplayPromoter({ onePromoter, userId, submittedBy, getO
       console.log(error);
     }
   };
-
+  // create component for "description of Incident" that fetches related companies and renders them (with links)
   return (
     <div className="results-container">
       <div className="results-inner">
@@ -91,11 +89,12 @@ export default function DisplayPromoter({ onePromoter, userId, submittedBy, getO
         <div className="promoterIncident">
           Description of the incident: {onePromoter.description}
         </div>
-        <div>Related companies: </div>
+        <div className="relatedCompanies">
+          <div>Related companies: </div> <LoadLinkedCompanies />
+        </div>
         <div className="status-line">
           Status: <StatusWidget />
         </div>
-
       </div>
       {userId === submittedBy && (
         <UserTools
@@ -106,7 +105,13 @@ export default function DisplayPromoter({ onePromoter, userId, submittedBy, getO
         />
       )}
       {/* {loadEditForm && <EditForm />} */}
-      {loadSearch && <SearchBox getSearchSuggestions={getSearchSuggestions} returnSearchValue={returnSearchValue} onePromoter={onePromoter} />}
+      {loadSearch && (
+        <SearchBox
+          getSearchSuggestions={getSearchSuggestions}
+          returnSearchValue={returnSearchValue}
+          onePromoter={onePromoter}
+        />
+      )}
     </div>
   );
 }

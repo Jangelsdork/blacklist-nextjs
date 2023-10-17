@@ -343,3 +343,9 @@ input:checked + .slider:before {
   background-color: #949494;
   cursor: pointer;
 }
+
+.relatedCompanies {
+  display: flex;
+  flex-direction: row;
+  
+}
