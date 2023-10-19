@@ -53,7 +53,6 @@ export default function DisplayPromoter({
 
   // if the status on the database is true, returns notification that the report is active
   function StatusWidget() {
-    console.log(onePromoter);
     if (onePromoter.status === 1)
       return <div className="status-true">Report is active</div>;
     else if (onePromoter.status === 0)
@@ -90,7 +89,7 @@ export default function DisplayPromoter({
           Description of the incident: {onePromoter.description}
         </div>
         <div className="relatedCompanies">
-          <div>Related companies: </div> <LoadLinkedCompanies />
+          <div>Related companies: </div> <LoadLinkedCompanies promoterId={onePromoter.id} />
         </div>
         <div className="status-line">
           Status: <StatusWidget />
