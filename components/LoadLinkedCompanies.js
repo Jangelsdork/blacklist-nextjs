@@ -4,7 +4,8 @@ import { useEffect, useState } from 'react';
 //props will need to be the current promoter id 
 const LoadLinkedCompanies = ({ promoterId }) => {
     const [linkedCompanies, setLinkedCompanies] = useState()
-
+    const [linkedCompanyNames, setLinkedCompanyNames] = useState([])
+    
     
     useEffect (() => { 
         async function getLinkedCompanies() {
@@ -15,7 +16,14 @@ const LoadLinkedCompanies = ({ promoterId }) => {
         renderCompanies()
       } 
     getLinkedCompanies()
+    getCompanyNames()
+
     },[])
+
+    function getCompanyNames(){
+    linkedCompanies.map((line) => console.log(line.companyId))
+
+    }
 
     // at the moment this just console logs the company ID, we want it to render in the dom (and ultimately get the company name)
     function renderCompanies()  {
